@@ -1,0 +1,17 @@
+{
+  "name": "PHP 8.1 with MySQL 8",
+  "image": "php:8.1-apache",
+  "extensions": ["ms-azuretools.vscode-docker"],
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "forwardPorts": [80],
+  "remoteUser": "vscode",
+  "appPort": 80,
+  "postCreateCommand": "docker-php-ext-install pdo_mysql && service apache2 restart",
+  "mounts": [
+    "source=${localWorkspaceFolder}/.vscode/,target=/home/vscode/.vscode,type=bind"
+  ],
+  "runArgs": ["-e", "MYSQL_ROOT_PASSWORD=root", "-p", "3306:3306"],
+  "dockerComposeFile": "docker-compose.yml"
+}
